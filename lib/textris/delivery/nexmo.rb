@@ -2,7 +2,7 @@ module Textris
   module Delivery
     class Nexmo < Textris::Delivery::Base
       def deliver(phone)
-        client.send_message(
+        client.sms.send(
           from: sender_id,
           to:   phone,
           text: message.content
