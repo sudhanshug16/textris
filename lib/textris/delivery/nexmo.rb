@@ -11,7 +11,7 @@ module Textris
 
       private
         def client
-          @client ||= ::Nexmo::Client.new
+          @client ||= ::Nexmo::Client.new(api_key: Rails.application.credentials.nexmo[:api_key], api_secret: Rails.application.credentials.nexmo[:api_secret])
         end
 
         def sender_id
