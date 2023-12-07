@@ -67,8 +67,6 @@ module Textris
         :renderer   => self)
 
       ::Textris::Message.new(options)
-    rescue StandardError => e
-      raise e
     end
 
     private
