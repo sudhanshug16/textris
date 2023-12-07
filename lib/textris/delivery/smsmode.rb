@@ -22,7 +22,7 @@ module Textris
           post_message(payload)
         end
 
-        def post_message
+        def post_message(payload)
           url = URI("https://rest.smsmode.com/sms/v1/messages")
           https = Net::HTTP.new(url.host, url.port)
           https.use_ssl = true
