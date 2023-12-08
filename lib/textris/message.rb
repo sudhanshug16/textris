@@ -12,10 +12,14 @@ module Textris
       @action     = options[:action]
       @args       = options[:args]
       @media_urls = options[:media_urls]
+      @force_smsmode = options[:force_smsmode]
     end
 
     def deliver
-      deliveries = ::Textris::Delivery.get
+      deliveries =
+        @force_smsmode ?
+          ["Textris::Delivery::Smsmode".safe_constantize] :
+          ::Textris::Delivery.get
       deliveries.each do |delivery|
         delivery.new(self).deliver_to_all
       end
