@@ -28,12 +28,18 @@ module Textris
           https.use_ssl = true
 
           request = Net::HTTP::Post.new(url)
-          request["X-Api-Key"] = Rails.application.credentials.smsmode[:api_key]
+          request["X-Api-Key"] = @message.provider_api_key
           request["Content-Type"] = "application/json"
           request["Accept"] = "application/json"
           request.body = JSON.dump(payload)
 
           response = https.request(request)
+          body = JSON.parse(response.body)
+
+          unless body["status"]["deliveryDate"].present?
+            error_message = "Error while calling SMSMode API: #{body["status"]} - #{body["message"]}"
+            raise error_message
+          end
         end
 
         def sender
