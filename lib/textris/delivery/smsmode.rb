@@ -34,6 +34,12 @@ module Textris
           request.body = JSON.dump(payload)
 
           response = https.request(request)
+          body = JSON.parse(response.body)
+
+          unless body["status"]["deliveryDate"].present?
+            error_message = "Error while calling SMSMode API: #{body["status"]} - #{body["message"]}"
+            raise error_message
+          end
         end
 
         def sender
