@@ -1,7 +1,7 @@
 module Textris
   class Message
     attr_reader :content, :from_name, :from_phone, :to, :texter, :action, :args,
-      :media_urls, :twilio_messaging_service_sid
+      :media_urls, :twilio_messaging_service_sid, :provider_api_key
 
     def initialize(options = {})
       initialize_content(options)
@@ -13,6 +13,7 @@ module Textris
       @args       = options[:args]
       @media_urls = options[:media_urls]
       @force_smsmode = options[:force_smsmode]
+      @provider_api_key = options[:api_key]
     end
 
     def deliver

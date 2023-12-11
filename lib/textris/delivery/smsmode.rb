@@ -28,7 +28,7 @@ module Textris
           https.use_ssl = true
 
           request = Net::HTTP::Post.new(url)
-          request["X-Api-Key"] = Rails.application.credentials.smsmode[:api_key]
+          request["X-Api-Key"] = @message.provider_api_key
           request["Content-Type"] = "application/json"
           request["Accept"] = "application/json"
           request.body = JSON.dump(payload)
